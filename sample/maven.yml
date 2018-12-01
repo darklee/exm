@@ -1,0 +1,8 @@
+env:
+  JAVA_HOME: $JAVA_HOME
+java:
+  version: 8
+maven:
+  download-url: http://mirrors.tuna.tsinghua.edu.cn/apache/maven/maven-3/3.6.0/binaries/apache-maven-3.6.0-bin.zip
+  artifact: "tenonx.tools:shell:0.0.1-SNAPSHOT"
+  main-class: ""
