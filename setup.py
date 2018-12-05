@@ -8,7 +8,7 @@ setuptools.setup(
     version="0.0.2",
     author="DarkLee",
     author_email="darklee@tenonx.com",
-    description="A tool for execution environment manage",
+    description="A tool for execution environment management",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/darklee/exm.git",
