@@ -7,7 +7,7 @@ class ExpressionString:
 
     def __init__(self, astr):
         self.segs = list()
-        matchs = re.finditer(r'\$\{(.*)\}', astr)
+        matchs = re.finditer(r'\$\{(.*?)\}', astr)
         start = 0
         for match in matchs:
             expression = match.group(1)

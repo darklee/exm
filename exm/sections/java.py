@@ -6,6 +6,8 @@ import subprocess
 
 def process(conf, ctx):
     ensureJavaVersion(conf)
+    if not conf["java"].get("bin"):
+        conf["java"]["bin"] = "%s/bin/java" % conf["env"]["JAVA_HOME"]
     pass
 
 
