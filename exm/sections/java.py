@@ -4,16 +4,16 @@ import shlex
 import subprocess
 
 
-def process(conf, ctx):
-    ensureJavaVersion(conf)
-    if not conf["java"].get("bin"):
-        conf["java"]["bin"] = "%s/bin/java" % conf["env"]["JAVA_HOME"]
+def process(ctx):
+    ensureJavaVersion(ctx)
+    if not ctx["java"].get("bin"):
+        ctx["java"]["bin"] = "%s/bin/java" % ctx["env"]["JAVA_HOME"]
     pass
 
 
-def ensureJavaVersion(conf):
-    javaHome = conf["env"]["JAVA_HOME"]
-    version = str(conf["java"]["version"])
+def ensureJavaVersion(ctx):
+    javaHome = ctx["env"]["JAVA_HOME"]
+    version = str(ctx["java"]["version"])
     # FIXME: 探测Java的版本号
     shell_cmd = '"%s/bin/java" -version' % javaHome
     cmd = shlex.split(shell_cmd)

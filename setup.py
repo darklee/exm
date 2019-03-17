@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="exm",
-    version="0.0.2",
+    version="0.0.3",
     author="DarkLee",
     author_email="darklee@tenonx.com",
     description="A tool for execution environment management",

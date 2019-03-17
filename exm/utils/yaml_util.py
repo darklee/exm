@@ -12,22 +12,12 @@ def load(file):
     with open(file, "r") as input:
         conf = yaml.load(input)
         pass
-    env = dict(os.environ)
+    systemenv = dict(os.environ)
+    env = {}
+    env.update(systemenv)
     env.update(conf)
-    replaceStringExpression(env, conf)
+    env["system"] = systemenv
+    conf["system"] = systemenv
+    expression.evaluate(env, conf)
     return conf
 
-
-def replaceStringExpression(env, obj):
-    result = obj
-    if type(obj) is dict:
-        for key, value in obj.items():
-            obj[key] = replaceStringExpression(env, value)
-    elif type(obj) is list:
-        for idx, value in enumerate(obj):
-            obj[idx] = replaceStringExpression(env, value)
-    else:
-        if type(obj) is str:
-            result = obj if obj.find(
-                "${") == -1 else expression.ExpressionString(obj).evaluate(env)
-    return result

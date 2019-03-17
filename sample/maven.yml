@@ -1,10 +1,28 @@
 env:
   JAVA_HOME: ${JAVA_HOME}
+  JAVA_DEBUG_PORT: 8888
   MAVEN_VERSION: 3.6.0
   APP_VERSION: 0.0.1-SNAPSHOT
 java:
   version: 1.8
+  jvm-options:
+    - server
+    # - agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=${env.JAVA_DEBUG_PORT}
+  x-options:
+    - ms250m
+  properties:
+    - system.properties.test=true
 maven:
+  repository: https://nexus.tenonx.com/repository/maven-public
+  version: ${env.MAVEN_VERSION}
   download-url: http://mirrors.tuna.tsinghua.edu.cn/apache/maven/maven-3/${env.MAVEN_VERSION}/binaries/apache-maven-${env.MAVEN_VERSION}-bin.zip
-  artifact: "tenonx.tools:shell:${env.APP_VERSION}"
-  main-class: ""
+  wrapper:
+    version: 0.5.3
+    download-url: ${maven.repository}/io/takari/maven-wrapper/${maven.wrapper.version}/maven-wrapper-${maven.wrapper.version}.tar.gz
+  properties:
+    - aoki.build.dev=true
+  execution:
+    repository: ${maven.repository}
+    boot-version: 2.1.0.RELEASE
+    artifact: aoki.tools:shell:${env.APP_VERSION}
+    main-class: aoki.tools.shell.ShellApplication

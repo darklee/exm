@@ -35,3 +35,18 @@ class ExpressionString:
             if not dt:
                 return None
         return dt
+        
+
+def evaluate(env, obj):
+    result = obj
+    if type(obj) is dict:
+        for key, value in obj.items():
+            obj[key] = evaluate(env, value)
+    elif type(obj) is list:
+        for idx, value in enumerate(obj):
+            obj[idx] = evaluate(env, value)
+    else:
+        if type(obj) is str:
+            result = obj if obj.find(
+                "${") == -1 else ExpressionString(obj).evaluate(env)
+    return result
